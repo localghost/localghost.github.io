@@ -1,0 +1,45 @@
+<html>
+<head>
+<script>
+function onInitFs(fs) {
+
+    fs.root.getFile('log.txt', {create: true}, function(fileEntry) {
+
+            // fileEntry.isFile === true
+            // fileEntry.name == 'log.txt'
+            // fileEntry.fullPath == '/log.txt'
+
+        alert('ble');
+            // Create a FileWriter object for our FileEntry (log.txt).
+            fileEntry.createWriter(function(fileWriter) {
+
+                    fileWriter.onwriteend = function(e) {
+                            console.log('Write completed.');
+                                  };
+
+                                        fileWriter.onerror = function(e) {
+                                                console.log('Write failed: ' + e.toString());
+                                                      };
+
+                                                            // Create a new Blob and write it to log.txt.
+                                                            var blob = new Blob(['Lorem Ipsum'], {type: 'text/plain'});
+
+                                                                  fileWriter.write(blob);
+                                                                  alert('written');
+            });
+          }, errorHandler);
+}
+
+function errorHandler(err) { alert(err.name); }
+
+
+function init()
+{
+  window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
+window.requestFileSystem(window.TEMPORARY, 1024*1024, onInitFs, errorHandler);
+}
+</script>
+</head>
+<body onload="init()">
+</body>
+</html>
