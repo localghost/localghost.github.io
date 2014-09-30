@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset=utf-8>
+<!-- saved from url=(0026)http://html5demos.com/drag -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=620">
 <title>HTML5 Demo: Drag and drop</title>
-<link rel="stylesheet" href="css/html5demos.css">
-<script src="js/h5utils.js"></script></head>
+<link rel="stylesheet" href="http://html5demos.com/css/html5demos.css">
+<script type="text/javascript" async="" src="./drag_files/azcarbon_2_1_0_VERT"></script><script src="./drag_files/h5utils.js"></script><script id="_carbonads_projs" type="text/javascript" src="./drag_files/C6AILKT.json"></script><style>.carbonad{background-color:#FBFBFB;border:2px solid #E8E8E8;height:215px;line-height:1.2;width:150px}.carbonad-img{float:left;height:100px;margin-left:11px;margin-top:11px;width:130px}.carbonad-text{color:#545454;float:left;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:400;height:50px;margin-left:15px;margin-top:9px;width:119px}.carbonad-text a{color:#545454;text-decoration:none;text-transform:none;}.carbonad-tag{color:#999;float:left;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:400;margin-left:17px;margin-top:15px;padding-top:5px}.carbonad-tag a{color:#999;text-align:center;text-decoration:none;font-weight:700}</style></head>
 <body>
 <section id="wrapper">
-<div id="carbonads-container"><div class="carbonad"><div id="azcarbon"></div><script type="text/javascript">var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = "http://engine.carbonads.com/z/14060/azcarbon_2_1_0_VERT"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);</script></div></div>
+<div id="carbonads-container"><div class="carbonad"><div id="azcarbon"><span><span class="carbonad-image"><a href="http://srv.carbonads.net/ads/click/x/GTND423JCVYDK23WCWB4YKQWC67DT2QMCYADTZ3JCEYI6K3MF6YDKK3KC6BD4KJECYBDTK3EHJNCLSIZ?segment=placement:html5demoscom" target="_blank"><img width="130" height="100" border="0" src="./drag_files/16903" class="carbonad-image carbonad-img"></a></span><span class="carbonad-text"><a href="http://srv.carbonads.net/ads/click/x/GTND423JCVYDK23WCWB4YKQWC67DT2QMCYADTZ3JCEYI6K3MF6YDKK3KC6BD4KJECYBDTK3EHJNCLSIZ?segment=placement:html5demoscom">The Stormpath API automates user management so you can build your Node application faster.</a></span><span class="carbonad-tag">ads via <a href="http://carbonads.com/">Carbon</a></span></span></div><script type="text/javascript">var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = "http://engine.carbonads.com/z/14060/azcarbon_2_1_0_VERT"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);</script></div></div>
     <header>
       <h1>Drag and drop</h1>
     </header>
@@ -80,13 +80,13 @@ li.over {
 </style>
 <article>
   <p>Drag the list items over the dustbin, and drop them to have the bin eat the item</p>
-  <div id="bin"></div>
+  <div id="bin" class="over"></div>
   <ul>
-    <li><a href="javascript:void();" id="one">one</a></li>
-    <li><a href="javascript:void();" id="two">two</a></li>
-    <li><a href="javascript:void();"  id="three">three</a></li>
-    <li><a href="javascript:void();"  id="four">four</a></li>
-    <li><a href="javascript:void();"  id="five">five</a></li>
+    <li><a id="one" href="http://html5demos.com/drag#" draggable="true">one</a></li>
+    <li><a href="http://html5demos.com/drag#" id="two" draggable="true">two</a></li>
+    <li><a href="http://html5demos.com/drag#" id="three" draggable="true">three</a></li>
+    <li><a href="http://html5demos.com/drag#" id="four" draggable="true">four</a></li>
+    <li><a href="http://html5demos.com/drag#" id="five" draggable="true">five</a></li>
   </ul>
 </article>
   <script>
@@ -104,6 +104,7 @@ li.over {
   
     addEvent(el, 'dragstart', function (e) {
       e.dataTransfer.effectAllowed = 'copy'; // only dropEffect='copy' will be dropable
+      alert(this.id);
       e.dataTransfer.setData('Text', this.id); // required otherwise doesn't work
     });
   }
@@ -118,7 +119,8 @@ li.over {
   });
 
   // to get IE to work
-  addEvent(bin, 'dragenter', function (e) {
+  addEvent(bin, 'dragenter', function (e) { 
+    alert(e.dataTransfer.getData('Text'));
     this.className = 'over';
     return false;
   });
@@ -129,8 +131,11 @@ li.over {
 
   addEvent(bin, 'drop', function (e) {
     if (e.stopPropagation) e.stopPropagation(); // stops the browser from redirecting...why???
+    if (e.preventDefault) e.preventDefault();
 
+//    alert(e.dataTransfer.getData('Text'));
     var el = document.getElementById(e.dataTransfer.getData('Text'));
+//    alert(el);
     
     el.parentNode.removeChild(el);
 
@@ -157,22 +162,23 @@ li.over {
     return false;
   });
 
-  </script>
+ </script>
 <a id="html5badge" href="http://www.w3.org/html/logo/">
-<img src="http://www.w3.org/html/logo/badge/html5-badge-h-connectivity-device-graphics-multimedia-performance-semantics-storage.png" width="325" height="64" alt="HTML5 Powered with Connectivity / Realtime, Device Access, Graphics, 3D &amp; Effects, Multimedia, Performance &amp; Integration, Semantics, and Offline &amp; Storage" title="HTML5 Powered with Connectivity / Realtime, Device Access, Graphics, 3D &amp; Effects, Multimedia, Performance &amp; Integration, Semantics, and Offline &amp; Storage">
+<img src="./drag_files/html5-badge-h-connectivity-device-graphics-multimedia-performance-semantics-storage.png" width="325" height="64" alt="HTML5 Powered with Connectivity / Realtime, Device Access, Graphics, 3D &amp; Effects, Multimedia, Performance &amp; Integration, Semantics, and Offline &amp; Storage" title="HTML5 Powered with Connectivity / Realtime, Device Access, Graphics, 3D &amp; Effects, Multimedia, Performance &amp; Integration, Semantics, and Offline &amp; Storage">
 </a>
-    <footer><a href="/">HTML5 demos</a>/<a id="built" href="http://twitter.com/rem">@rem built this</a>/<a href="#view-source">view source</a></footer> 
+    <footer><a href="http://html5demos.com/">HTML5 demos</a>/<a id="built" href="http://twitter.com/rem">@rem built this</a>/<a href="http://html5demos.com/drag#view-source">view source</a></footer> 
 </section>
-<a href="http://github.com/remy/html5demos"><img style="position: absolute; top: 0; left: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub" /></a>
-<script src="js/prettify.packed.js"></script>
+<a href="http://github.com/remy/html5demos"><img style="position: absolute; top: 0; left: 0; border: 0;" src="./drag_files/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+<script src="./drag_files/prettify.packed.js"></script>
 <script>
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
+</script><script src="./drag_files/ga.js" type="text/javascript"></script>
 <script>
 try {
 var pageTracker = _gat._getTracker("UA-1656750-18");
 pageTracker._trackPageview();
 } catch(err) {}</script>
-</body>
-</html>
+
+
+</body></html>
