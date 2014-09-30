@@ -120,7 +120,7 @@ li.over {
 
   // to get IE to work
   addEvent(bin, 'dragenter', function (e) { 
-    console.log(e.dataTransfer.getData('Text'));
+    alert(e.dataTransfer.getData('Text'));
     this.className = 'over';
     return false;
   });
