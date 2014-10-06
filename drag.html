@@ -78,18 +78,20 @@ li.over {
   text-shadow: #000 2px 2px 2px;
 }
 </style>
+<div id="log"></div>
 <article>
   <p>Drag the list items over the dustbin, and drop them to have the bin eat the item</p>
   <div id="bin" class="over"></div>
   <ul>
-    <li><a id="one" href="http://html5demos.com/drag#" draggable="true">one</a></li>
-    <li><a href="http://html5demos.com/drag#" id="two" draggable="true">two</a></li>
-    <li><a href="http://html5demos.com/drag#" id="three" draggable="true">three</a></li>
-    <li><a href="http://html5demos.com/drag#" id="four" draggable="true">four</a></li>
-    <li><a href="http://html5demos.com/drag#" id="five" draggable="true">five</a></li>
+    <li><a id="one" href="#" draggable="true">one</a></li>
+    <li><a href="#" id="two" draggable="true">two</a></li>
+    <li><a href="#" id="three" draggable="true">three</a></li>
+    <li><a href="#" id="four" draggable="true">four</a></li>
+    <li><a href="#" id="five" draggable="true">five</a></li>
   </ul>
 </article>
   <script>
+  function logit(msg) { document.getElementById('log').innerHTML += msg + '<br/>'; }
 
   var eat = ['yum!', 'gulp', 'burp!', 'nom'];
   var yum = document.createElement('p');
@@ -104,7 +106,7 @@ li.over {
   
     addEvent(el, 'dragstart', function (e) {
       e.dataTransfer.effectAllowed = 'copy'; // only dropEffect='copy' will be dropable
-      alert(this.id);
+      logit("setting id: " + this.id);
       e.dataTransfer.setData('Text', this.id); // required otherwise doesn't work
     });
   }
@@ -120,7 +122,6 @@ li.over {
 
   // to get IE to work
   addEvent(bin, 'dragenter', function (e) { 
-    alert(e.dataTransfer.getData('Text'));
     this.className = 'over';
     return false;
   });
@@ -134,6 +135,7 @@ li.over {
     if (e.preventDefault) e.preventDefault();
 
 //    alert(e.dataTransfer.getData('Text'));
+    logit("getting id: " + e.dataTransfer.getData('Text'));
     var el = document.getElementById(e.dataTransfer.getData('Text'));
 //    alert(el);
     
